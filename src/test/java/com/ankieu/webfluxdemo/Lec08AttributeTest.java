@@ -8,19 +8,18 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-public class Lec04HeaderRequestTest extends BaseTest{
+public class Lec08AttributeTest extends BaseTest{
 
     @Autowired
     private WebClient webClient;
 
     @Test
-    public void postTest(){
+    public void attributeTest(){
         Mono<Response> responseMono = webClient
                 .post()
                 .uri("reactive-math/multiply")
                 .bodyValue(buildDTO(5, 2))
-                .headers(h -> h.set("someKey", "someVal"))
-//                .headers(h -> h.setBasicAuth("username", "password"))
+//                .attribute("auth", "oauth")
                 .retrieve()
                 .bodyToMono(Response.class)
                 .doOnNext(System.out::println);
